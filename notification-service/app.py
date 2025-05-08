@@ -1,6 +1,17 @@
 import pika
+import time
 
-connection = pika.BlockingConnection(pika.ConnectionParameters(host='rabbitmq'))
+def connect_to_rabbitmq():
+    while True:
+        try:
+            connection = pika.BlockingConnection(pika.ConnectionParameters(host='rabbitmq'))
+            return connection
+        except pika.exceptions.AMQPConnectionError:
+            print("[Notification Service] Waiting for RabbitMQ...")
+            time.sleep(5)
+
+# RabbitMQ connection
+connection = connect_to_rabbitmq()
 channel = connection.channel()
 channel.queue_declare(queue='notification')
 
