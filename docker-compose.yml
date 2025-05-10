@@ -22,3 +22,20 @@ services:
     ports:
       - "15672:15672"
       - "5672:5672"
+
+  # prometheus:
+  #   image: prom/prometheus
+  #   volumes:
+  #     - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+  #   ports:
+  #     - "9090:9090"
+  #   depends_on:
+  #     - service_a
+  #     - service_b
+
+  # grafana:
+  #   image: grafana/grafana
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - prometheus
