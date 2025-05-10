@@ -1,11 +1,26 @@
 global:
-  scrape_interval: 5s
+  scrape_interval:     5s
+  evaluation_interval: 5s
 
 scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
   - job_name: 'visit-service'
     static_configs:
-      - targets: ['visit-service:5001']
-  
-  - job_name: 'service_b'
+      - targets: ['visit-service:8001']
+
+  - job_name: 'notification-service'
     static_configs:
-      - targets: ['service_b:5001']
+      - targets: ['notification-service:8000']
+
+
+alerting:
+    alertmanagers:
+    - static_configs:
+        - targets:
+            - "alertmanager:9093"
+
+rule_files:
+  - "alert_rules.yml" 

@@ -3,3 +3,4 @@ redis
 pika
 requests
 uvicorn
+prometheus_client

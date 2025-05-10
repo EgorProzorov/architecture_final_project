@@ -1,0 +1,11 @@
+groups:
+  - name: visit-alerts
+    rules:
+      - alert: VisitEndpointCalled
+        expr: increase(visit_count[1m]) > 0
+        for: 0m
+        labels:
+          severity: info
+        annotations:
+          summary: "Visit endpoint called"
+          description: "The /visit endpoint has been called in the last minute."
