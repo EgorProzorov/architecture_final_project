@@ -2,10 +2,21 @@ groups:
   - name: visit-alerts
     rules:
       - alert: VisitEndpointCalled
-        expr: increase(visit_count[1m]) > 0
+        expr: increase(visit_count_total[1m]) > 0
         for: 0m
         labels:
           severity: info
         annotations:
           summary: "Visit endpoint called"
           description: "The /visit endpoint has been called in the last minute."
+
+  - name: cpu-alerts
+    rules:
+      - alert: HighSystemCPUUsage
+        expr: system_cpu_usage > 0.90
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "High system CPU usage detected"
+          description: "Overall CPU usage on the system is over 90% for the last 2 minutes."
